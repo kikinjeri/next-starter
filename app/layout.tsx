@@ -13,7 +13,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "next-starter",
-  description: "A personal starter template for Next.js projects",
+  description: "Mahal Tanjore Restaurant ",
 };
 
 export default function RootLayout({

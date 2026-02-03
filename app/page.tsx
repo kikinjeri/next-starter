@@ -1,24 +1,32 @@
+import Link from "next/link";
 
-import { Button } from "@/components/ui/Button";
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <div>
-      <Section title="Cinematic Test">
-        <p>
-          This is your new cinematic foundation — deep charcoal, soft off‑white,
-          gold accents, and a subtle gradient wash in the background. Everything
-          is structural, responsive, and ready for any project.
+    <main className="min-h-screen bg-[#faf6ef] p-6">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-4xl font-serif text-[#7a1f1f] mb-4">
+          Mahal Tanjore Social Studio
+        </h1>
+        <p className="text-gray-700 mb-8">
+          Generate flyer-style social posts for Bluesky, Facebook, and
+          Instagram.
         </p>
 
-        <Card title="Atmosphere Check">
-          <p>
-            Cards use a soft glassy background with charcoal borders. This keeps
-            things modern and premium without locking you into a design system.
-          </p>
-          <Button>Test Button</Button>
-        </Card>
-      </Section>
-    </div>
+        <div className="flex flex-col gap-4">
+          <Link
+            href="/create-post"
+            className="inline-block bg-[#7a1f1f] text-white px-4 py-3 rounded-lg font-semibold"
+          >
+            Create Post
+          </Link>
+          <Link
+            href="/posts"
+            className="inline-block bg-[#c49a6c] text-white px-4 py-3 rounded-lg font-semibold"
+          >
+            View Drafts & Scheduled Posts
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }

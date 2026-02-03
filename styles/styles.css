@@ -112,7 +112,7 @@ body {
   backdrop-filter: blur(4px);
 }
 
-/* Button */
+/* Button 
 .btn {
   display: inline-flex;
   align-items: center;
@@ -129,7 +129,7 @@ body {
 .btn:hover {
   background: var(--accent-2);
 }
-
+/*
 /* Section title */
 .section-title {
   font-size: 2rem;
