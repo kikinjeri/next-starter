@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+
 import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
@@ -12,8 +11,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "next-starter",
-  description: "Mahal Tanjore Restaurant ",
+  title: "Ottawa Eats",
+  description: "Flyer-style social posts for restaurants in Ottawa.",
 };
 
 export default function RootLayout({
@@ -24,9 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.variable}>
-        <Header />
-        <main className="container mx-auto px-4 py-8">{children}</main>
-        <Footer />
+        <main className="container py-8 section">{children}</main>
       </body>
     </html>
   );

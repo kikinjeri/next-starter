@@ -60,31 +60,31 @@ export default function CaptionForm({ dish }: { dish: any }) {
   }
 
   return (
-    <div>
+    <div className="card space-y-6">
       <button
         onClick={handleGenerate}
         disabled={loading}
-        className="w-full bg-[#7a1f1f] text-white py-3 rounded-lg font-semibold hover:bg-[#5e1717] transition"
+        className="btn btn-primary w-full justify-center"
       >
         {loading ? "Generating..." : "Generate Flyer-Style Caption"}
       </button>
 
-      <div className="mt-6">
-        <label className="block text-sm font-semibold text-[#7a1f1f] mb-2">
+      <div>
+        <label className="block text-sm font-semibold mb-2">
           Caption Preview
         </label>
         <textarea
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
-          className="w-full h-48 p-4 border border-[#e8dcc2] rounded-lg bg-[#fffdf8] focus:ring-[#7a1f1f]"
+          className="w-full h-48 p-4 rounded-lg border border-[var(--border)] bg-[rgba(0,0,0,0.4)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
           placeholder="Your flyer-style caption will appear here..."
         />
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 mt-6">
+      <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={() => navigator.clipboard.writeText(caption)}
-          className="flex-1 bg-[#7a1f1f] text-white py-3 rounded-lg font-semibold hover:bg-[#5e1717] transition"
+          className="btn btn-secondary flex-1 justify-center"
         >
           Copy Caption
         </button>
@@ -92,50 +92,50 @@ export default function CaptionForm({ dish }: { dish: any }) {
         <button
           onClick={handleSaveDraft}
           disabled={saving}
-          className="flex-1 bg-[#c49a6c] text-white py-3 rounded-lg font-semibold hover:bg-[#a67f55] transition"
+          className="btn btn-primary flex-1 justify-center"
         >
           {saving ? "Saving..." : "Save Draft"}
         </button>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 mt-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={handlePostBluesky}
           disabled={!caption}
-          className="flex-1 bg-[#1e90ff] text-white py-3 rounded-lg font-semibold hover:bg-[#187bcd] transition"
+          className="btn btn-bluesky flex-1 justify-center"
         >
           Post to Bluesky
         </button>
         <button
           onClick={handlePostFacebook}
           disabled={!caption}
-          className="flex-1 bg-[#1877f2] text-white py-3 rounded-lg font-semibold hover:bg-[#145ec4] transition"
+          className="btn btn-facebook flex-1 justify-center"
         >
           Post to Facebook (stub)
         </button>
         <button
           onClick={handlePostInstagram}
           disabled={!caption}
-          className="flex-1 bg-[#e1306c] text-white py-3 rounded-lg font-semibold hover:bg-[#b82455] transition"
+          className="btn btn-instagram flex-1 justify-center"
         >
           Post to Instagram (stub)
         </button>
       </div>
 
-      <div className="mt-8">
-        <label className="block text-sm font-semibold text-[#7a1f1f] mb-2">
+      <div>
+        <label className="block text-sm font-semibold mb-2">
           Schedule Reminder
         </label>
         <input
           type="datetime-local"
           value={scheduledFor}
           onChange={(e) => setScheduledFor(e.target.value)}
-          className="w-full p-3 border border-[#e8dcc2] rounded-lg bg-[#fffdf8]"
+          className="w-full p-3 rounded-lg border border-[var(--border)] bg-[rgba(0,0,0,0.4)] text-[var(--foreground)]"
         />
         <button
           onClick={handleSchedule}
           disabled={!scheduledFor || !caption}
-          className="w-full mt-3 bg-[#7a1f1f] text-white py-3 rounded-lg font-semibold hover:bg-[#5e1717] transition"
+          className="btn btn-primary w-full justify-center mt-3"
         >
           Schedule Post
         </button>

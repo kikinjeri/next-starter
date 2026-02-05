@@ -1,8 +1,10 @@
-export function slugify(text: string) {
+export function slugify(text: string): string {
   return text
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+    .replace(/[\s\_]+/g, '-')       // spaces & underscores → hyphens
+    .replace(/[^\w\-]+/g, '')       // remove non-word chars
+    .replace(/\-\-+/g, '-')         // collapse multiple hyphens
+    .replace(/^-+/, '')             // trim hyphens from start
+    .replace(/-+$/, '');            // trim hyphens from end
 }

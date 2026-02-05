@@ -7,7 +7,6 @@ const client = new Groq({
   apiKey: process.env.GROQ_API_KEY!,
 });
 
-// Flyer-style, menu-aware caption
 export async function generateCaption({
   caption,
   dish,
@@ -51,8 +50,13 @@ User caption: "${caption}"
   return response.choices[0].message.content;
 }
 
-// Save draft
-export async function saveDraft({ dishId, caption }: { dishId: string; caption: string }) {
+export async function saveDraft({
+  dishId,
+  caption,
+}: {
+  dishId: string;
+  caption: string;
+}) {
   return await supabaseAdmin.from("posts").insert({
     dish_id: dishId,
     caption,
@@ -60,7 +64,6 @@ export async function saveDraft({ dishId, caption }: { dishId: string; caption: 
   });
 }
 
-// Schedule post
 export async function schedulePost({
   dishId,
   caption,
@@ -78,17 +81,22 @@ export async function schedulePost({
   });
 }
 
-// Update post
-export async function updatePost({ id, caption }: { id: string; caption: string }) {
+export async function updatePost({
+  id,
+  caption,
+}: {
+  id: string;
+  caption: string;
+}) {
   return await supabaseAdmin.from("posts").update({ caption }).eq("id", id);
 }
 
-// Mark as posted
 export async function markAsPosted(id: string) {
-  return await supabaseAdmin.from("posts").update({ status: "posted" }).eq("id", id);
+  return await supabaseAdmin.from("posts")
+    .update({ status: "posted" })
+    .eq("id", id);
 }
 
-// Post to Bluesky (text only)
 export async function postToBluesky(caption: string) {
   const username = process.env.BLUESKY_USERNAME!;
   const password = process.env.BLUESKY_APP_PASSWORD!;
@@ -132,11 +140,14 @@ export async function postToBluesky(caption: string) {
   return await postRes.json();
 }
 
-// Stubs for future Facebook / Instagram integrations
+/* Stubs for future integrations */
+
 export async function postToFacebook(_caption: string) {
-  console.log("TODO: implement Facebook posting");
+  // TODO: integrate with Facebook API
+  return { ok: true };
 }
 
 export async function postToInstagram(_caption: string) {
-  console.log("TODO: implement Instagram posting");
+  // TODO: integrate with Instagram API
+  return { ok: true };
 }

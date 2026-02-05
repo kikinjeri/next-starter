@@ -1,54 +1,64 @@
-import { supabase } from "../../supabase";
-import CaptionForm from "./ui/CaptionForm";
+// app/create-post/page.tsx
+import { createClient } from "@supabase/supabase-js";
+import CreatePostClient from "./CreatePostClient";
 
-export const metadata = {
-  title: "Create Post | Mahal Tanjore Social Studio",
-  description: "Generate flyer-style, menu-aware social posts.",
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+);
+
+type PageProps = {
+  searchParams: Promise<{
+    restaurantId?: string;
+    dishId?: string;
+  }>;
 };
 
-export default async function CreatePostPage({
-  searchParams,
-}: {
-  searchParams: { dishId?: string };
-}) {
-  const dishId = searchParams?.dishId;
+export default async function CreatePostPage(props: PageProps) {
+  // ⭐ Next.js 16 fix — unwrap the Promise
+  const searchParams = await props.searchParams;
+
+  const restaurantId = searchParams.restaurantId;
+  const dishId = searchParams.dishId;
+
+  if (!restaurantId || !dishId) {
+    return <div className="p-6">Missing restaurantId or dishId.</div>;
+  }
+
+  // ⭐ Use the correct table: menu_items
+  const { data: restaurant } = await supabase
+    .from("restaurants")
+    .select("id, name, neighbourhood, address, phone, website")
+    .eq("id", restaurantId)
+    .single();
 
   const { data: dish } = await supabase
     .from("menu_items")
-    .select("*")
+    .select("id, name, price, meal_type, description")
     .eq("id", dishId)
     .single();
 
-  if (!dish) {
-    return (
-      <div className="p-6 text-center text-red-600">
-        Dish not found. Provide a valid dishId in the URL.
-      </div>
-    );
+  if (!restaurant || !dish) {
+    return <div className="p-6">Restaurant or dish not found.</div>;
   }
 
   return (
-    <div className="min-h-screen bg-[#faf6ef] p-6">
-      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-8 border border-[#e8dcc2]">
-        <h1 className="text-3xl font-serif text-[#7a1f1f] mb-6">
-          Create Post for {dish.name}
-        </h1>
-
-        <div className="mb-6 p-4 bg-[#fff8e6] border border-[#e8dcc2] rounded-lg">
-          <h2 className="text-xl font-semibold text-[#7a1f1f]">{dish.name}</h2>
-          <p className="text-sm text-gray-700">{dish.category}</p>
-          {dish.description && (
-            <p className="mt-2 text-gray-800">{dish.description}</p>
-          )}
-          {dish.price && (
-            <p className="mt-2 font-semibold text-[#7a1f1f]">
-              Price: ${dish.price}
-            </p>
-          )}
-        </div>
-
-        <CaptionForm dish={dish} />
-      </div>
-    </div>
+    <CreatePostClient
+      restaurant={{
+        id: restaurant.id,
+        name: restaurant.name,
+        neighbourhood: restaurant.neighbourhood,
+        address: restaurant.address,
+        phone: restaurant.phone,
+        website: restaurant.website,
+      }}
+      dish={{
+        id: dish.id,
+        name: dish.name,
+        price: dish.price,
+        mealType: dish.meal_type,
+        description: dish.description,
+      }}
+    />
   );
 }
