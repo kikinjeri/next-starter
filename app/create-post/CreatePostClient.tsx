@@ -55,10 +55,13 @@ export function CreatePostClient({ restaurant, dish }: Props) {
     feed: "ottawa-restaurants",
   };
 
+  // -----------------------------
+  // POST TO BLUESKY
+  // -----------------------------
   const postToBluesky = async () => {
     try {
       setPosting(true);
-      const res = await fetch("/api/bsky/post", {
+      const res = await fetch("/api/post-to-bsky", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postPayload),
@@ -69,10 +72,13 @@ export function CreatePostClient({ restaurant, dish }: Props) {
     }
   };
 
+  // -----------------------------
+  // SAVE DRAFT
+  // -----------------------------
   const saveDraft = async () => {
     try {
       setSavingDraft(true);
-      const res = await fetch("/api/drafts", {
+      const res = await fetch("/api/drafts/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postPayload),
@@ -83,11 +89,14 @@ export function CreatePostClient({ restaurant, dish }: Props) {
     }
   };
 
+  // -----------------------------
+  // SCHEDULE POST
+  // -----------------------------
   const schedulePost = async () => {
     if (!scheduledAt) return;
     try {
       setScheduling(true);
-      const res = await fetch("/api/scheduled-posts", {
+      const res = await fetch("/api/scheduled-posts/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...postPayload, scheduled_at: scheduledAt }),

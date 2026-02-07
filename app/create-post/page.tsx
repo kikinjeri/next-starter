@@ -1,4 +1,6 @@
 // app/create-post/page.tsx
+export const dynamic = "force-dynamic";
+
 import { createClient } from "@supabase/supabase-js";
 import CreatePostClient from "./CreatePostClient";
 
@@ -8,16 +10,13 @@ const supabase = createClient(
 );
 
 type PageProps = {
-  searchParams: Promise<{
+  searchParams: {
     restaurantId?: string;
     dishId?: string;
-  }>;
+  };
 };
 
-export default async function CreatePostPage(props: PageProps) {
-  // ⭐ Next.js 16 fix — unwrap the Promise
-  const searchParams = await props.searchParams;
-
+export default async function CreatePostPage({ searchParams }: PageProps) {
   const restaurantId = searchParams.restaurantId;
   const dishId = searchParams.dishId;
 
@@ -25,16 +24,17 @@ export default async function CreatePostPage(props: PageProps) {
     return <div className="p-6">Missing restaurantId or dishId.</div>;
   }
 
-  // ⭐ Use the correct table: menu_items
+  // Fetch restaurant
   const { data: restaurant } = await supabase
     .from("restaurants")
     .select("id, name, neighbourhood, address, phone, website")
     .eq("id", restaurantId)
     .single();
 
+  // Fetch dish
   const { data: dish } = await supabase
     .from("menu_items")
-    .select("id, name, price, meal_type, description")
+    .select("id, name, price, category, dietary_labels, image_url")
     .eq("id", dishId)
     .single();
 
@@ -56,8 +56,9 @@ export default async function CreatePostPage(props: PageProps) {
         id: dish.id,
         name: dish.name,
         price: dish.price,
-        mealType: dish.meal_type,
-        description: dish.description,
+        category: dish.category,
+        dietary_labels: dish.dietary_labels,
+        image_url: dish.image_url,
       }}
     />
   );
