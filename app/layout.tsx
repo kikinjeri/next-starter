@@ -1,30 +1,15 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import type { ReactNode } from "react";
 
-import { Montserrat } from "next/font/google";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-montserrat",
-});
-
-export const metadata: Metadata = {
-  title: "Ottawa Eats",
-  description: "Flyer-style social posts for restaurants in Ottawa.",
+export const metadata = {
+  title: "Ottawa Eats Social Bot",
+  description: "Automated restaurant posting powered by Supabase + Bluesky",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={montserrat.variable}>
-        <main className="container py-8 section">{children}</main>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

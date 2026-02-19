@@ -1,86 +1,65 @@
-type Restaurant = {
-  name: string;
-  neighbourhood: string;
-  price_range: string;
-  vibe: string | null;
-  website: string | null;
-  description: string | null;
-  primary_color: string;
-  secondary_color: string;
-  text_color: string;
-};
-
-type MenuItem = {
-  id: string;
-  name: string;
-  description: string | null;
-  price: string | null;
-};
-
-type Props = {
-  restaurant: Restaurant;
-  menuItems: MenuItem[];
-};
-
-export function RestaurantCard({ restaurant, menuItems }: Props) {
-  const spotlightItems = menuItems.slice(0, 5);
-
+// components/RestaurantCard.tsx
+export default function RestaurantCard({ restaurant }) {
   return (
-    <div
-      className="w-full max-w-xl rounded-2xl p-6 shadow-lg"
-      style={{
-        backgroundColor: restaurant.primary_color,
-        color: restaurant.text_color,
-      }}
-    >
-      {/* Header */}
-      <div className="flex flex-col gap-1 mb-4">
-        <h1 className="text-2xl font-semibold">{restaurant.name}</h1>
-        <p className="text-sm opacity-90">
-          {restaurant.neighbourhood} • {restaurant.price_range}
-        </p>
-        {restaurant.vibe && (
-          <p className="text-sm opacity-80">Vibe: {restaurant.vibe}</p>
+    <article className="border rounded-lg p-4 shadow-sm bg-white">
+      <header className="flex items-center gap-3">
+        {restaurant.logo_url && (
+          <img
+            src={restaurant.logo_url}
+            alt={`${restaurant.name} logo`}
+            className="w-12 h-12 rounded object-cover"
+          />
         )}
-        {restaurant.website && (
-          <a
-            href={restaurant.website}
-            className="text-sm underline"
-            style={{ color: restaurant.secondary_color }}
-          >
-            {restaurant.website.replace(/^https?:\/\//, "")}
-          </a>
-        )}
-      </div>
 
-      {/* Description */}
+        <div>
+          <h2 className="text-xl font-semibold">{restaurant.name}</h2>
+          {restaurant.neighbourhood && (
+            <p className="text-sm text-gray-600">{restaurant.neighbourhood}</p>
+          )}
+        </div>
+      </header>
+
       {restaurant.description && (
-        <p className="text-sm mb-4 opacity-90">{restaurant.description}</p>
+        <p className="mt-3 text-gray-700">{restaurant.description}</p>
       )}
 
-      {/* Menu items */}
-      <div
-        className="rounded-xl p-4"
-        style={{
-          backgroundColor: restaurant.secondary_color,
-          color: "#111827",
-        }}
-      >
-        <h2 className="text-sm font-semibold mb-2">What to try:</h2>
-        <ul className="space-y-1">
-          {spotlightItems.map((item) => (
-            <li key={item.id} className="text-sm">
-              <span className="font-medium">{item.name}</span>
-              {item.price && <span> • ${item.price}</span>}
-              {item.description && (
-                <span className="block text-xs text-gray-700">
-                  {item.description}
-                </span>
-              )}
-            </li>
+      <ul className="mt-3 text-sm text-gray-800 space-y-1">
+        {restaurant.address && (
+          <li>
+            <strong>Address:</strong> {restaurant.address}
+          </li>
+        )}
+        {restaurant.phone && (
+          <li>
+            <strong>Phone:</strong> {restaurant.phone}
+          </li>
+        )}
+        {restaurant.website && (
+          <li>
+            <strong>Website:</strong>{" "}
+            <a
+              href={restaurant.website}
+              rel="nofollow"
+              className="text-blue-600 underline"
+            >
+              {restaurant.website}
+            </a>
+          </li>
+        )}
+      </ul>
+
+      {restaurant.tags?.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {restaurant.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-2 py-1 text-xs bg-gray-100 rounded-full border"
+            >
+              {tag}
+            </span>
           ))}
-        </ul>
-      </div>
-    </div>
+        </div>
+      )}
+    </article>
   );
 }
