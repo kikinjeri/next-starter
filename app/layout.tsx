@@ -9,7 +9,13 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      <header>
+      
+      </header>
       <body>{children}</body>
+      <footer className="footer text-center mt-16 py-6 text-[var(--card-muted)]">
+        I ❤️ Ottawa!
+      </footer>
     </html>
   );
 }

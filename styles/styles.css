@@ -29,6 +29,19 @@
   backdrop-filter: blur(6px);
 }
 
+.card-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--card-muted);
+  letter-spacing: 0.4px;
+}
+
+.card-footer .footer-handle {
+  color: var(--card-gold);
+  font-weight: 600;
+}
+
 /* Section title */
 
 .section-title {
@@ -122,4 +135,109 @@
 
 .btn-instagram:hover:not(:disabled) {
   background: #b82455;
+}
+
+/* ----------------------------------------
+   RESTAURANT CARD (CINEMATIC NAVY + GOLD)
+---------------------------------------- */
+
+:root {
+  --card-navy: #0a1a2f;
+  --card-gold: #f5c26b;
+  --card-sky: #7ec8ff;
+  --card-text: #ffffff;
+  --card-muted: #c7d3e0;
+}
+
+.restaurant-card {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, #0a1a2f, #0f243d);
+  color: var(--card-text);
+  border-radius: 1rem;
+  border: 2px solid var(--card-gold);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.card-header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--card-gold);
+  margin-bottom: 0.25rem;
+}
+
+.card-header .neighborhood {
+  font-size: 1.1rem;
+  color: var(--card-sky);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.description {
+  margin: 1rem 0;
+  color: var(--card-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.info-section p {
+  margin: 0.3rem 0;
+}
+
+.info-section a {
+  color: var(--card-gold);
+  text-decoration: underline;
+}
+
+.menu-section h2,
+.specials-section h2 {
+  margin-top: 1.5rem;
+  color: var(--card-gold);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.menu-section ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+.menu-section li {
+  margin: 0.4rem 0;
+  font-size: 1.1rem;
+}
+
+.dish {
+  color: var(--card-sky);
+  font-weight: 600;
+}
+
+.price {
+  color: var(--card-gold);
+}
+
+.image-slot {
+  width: 100%;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed var(--card-sky);
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+
+.card-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--card-muted);
+  letter-spacing: 0.4px;
+}
+
+.card-footer .footer-handle {
+  color: var(--card-gold);
+  font-weight: 600;
 }

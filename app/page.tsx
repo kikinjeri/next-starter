@@ -65,10 +65,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="footer text-center">
-        I ❤️  Ottawa — Powered by Supabase +
-        Next.js + Bluesky
-      </footer>
+      <footer className="footer text-center">I ❤️ Ottawa</footer>
     </main>
   );
 }

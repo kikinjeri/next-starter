@@ -1,11 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-export function getSupabaseServer() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
+import { getSupabaseServer } from "./client";
 
 export async function getRestaurantBySlug(slug: string) {
   const supabase = getSupabaseServer();
@@ -19,3 +12,4 @@ export async function getRestaurantBySlug(slug: string) {
   if (error) throw error;
   return data;
 }
+
