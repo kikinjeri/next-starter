@@ -66,7 +66,8 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="footer text-center">
-        Built with ❤️ in Ottawa — Powered by Supabase + Bluesky
+        I ❤️  Ottawa — Powered by Supabase +
+        Next.js + Bluesky
       </footer>
     </main>
   );
