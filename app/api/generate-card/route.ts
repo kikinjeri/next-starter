@@ -45,17 +45,38 @@ export async function GET(req: Request) {
     .eq("restaurant_id", id)
     .single();
 
-  // Generate HTML
-  const html = generateRestaurantCardHTML(
+  // Generate the card HTML (semantic, accessible, brand-colored)
+  const cardHTML = generateRestaurantCardHTML(
     restaurant,
     menuItems || [],
     specials || undefined
   );
 
-  return new NextResponse(html, {
-    status: 200,
-    headers: {
-      "Content-Type": "text/html; charset=utf-8",
-    },
-  });
+  // Return a full HTML document that loads styles.css
+  return new NextResponse(
+    `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Load ONLY the restaurant-card stylesheet -->
+        <link rel="stylesheet" href="/styles/styles.css" />
+
+        <title>${restaurant.name} — Menu Card</title>
+      </head>
+
+      <body>
+        ${cardHTML}
+      </body>
+    </html>
+    `,
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+      },
+    }
+  );
 }

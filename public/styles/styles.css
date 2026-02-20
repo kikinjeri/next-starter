@@ -1,6 +1,8 @@
 /* ----------------------------------------
    STRUCTURAL COMPONENTS
 ---------------------------------------- */
+/* Load crisp Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 .header {
   width: 100%;
@@ -138,106 +140,159 @@
 }
 
 /* ----------------------------------------
-   RESTAURANT CARD (CINEMATIC NAVY + GOLD)
+   RESTAURANT CARD (SEMANTIC + ACCESSIBLE)
+   Uses restaurant-specific colors:
+   --primary, --secondary, --text
 ---------------------------------------- */
-
-:root {
-  --card-navy: #0a1a2f;
-  --card-gold: #f5c26b;
-  --card-sky: #7ec8ff;
-  --card-text: #ffffff;
-  --card-muted: #c7d3e0;
-}
 
 .restaurant-card {
   width: 100%;
-  max-width: 600px;
-  margin: auto;
+  max-width: 640px;
+  margin: 2rem auto;
   padding: 2rem;
-  background: linear-gradient(145deg, #0a1a2f, #0f243d);
-  color: var(--card-text);
+  background: var(--primary);
+  color: var(--text);
   border-radius: 1rem;
-  border: 2px solid var(--card-gold);
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--secondary);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
   font-family: 'Inter', system-ui, sans-serif;
 }
 
 .card-header h1 {
   font-size: 2.4rem;
   font-weight: 800;
-  color: var(--card-gold);
+  color: var(--secondary);
   margin-bottom: 0.25rem;
 }
 
-.card-header .neighborhood {
+.neighbourhood {
   font-size: 1.1rem;
-  color: var(--card-sky);
+  color: var(--secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .description {
   margin: 1rem 0;
-  color: var(--card-muted);
-  font-size: 1.1rem;
+  color: var(--text);
+  opacity: 0.85;
   line-height: 1.6;
 }
 
-.info-section p {
-  margin: 0.3rem 0;
+.info-section p strong {
+  color: var(--secondary);
+  font-weight: 600;
 }
 
-.info-section a {
-  color: var(--card-gold);
-  text-decoration: underline;
+/* Menu layout */
+.menu-section {
+  text-align: center;
+  margin-top: 2rem;
 }
 
-.menu-section h2,
-.specials-section h2 {
-  margin-top: 1.5rem;
-  color: var(--card-gold);
-  font-size: 1.4rem;
+.menu-section h2 {
+  color: var(--secondary);
+  font-size: 1.6rem;
   font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-.menu-section ul {
-  list-style: none;
+/* Category titles */
+.menu-category {
+  margin-top: 1.5rem;
+}
+
+.category-title {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Category list centered */
+.category-list {
   padding: 0;
-  margin-top: 0.5rem;
+  margin: 0 auto;
+  display: inline-block;
+  text-align: left;
 }
 
-.menu-section li {
-  margin: 0.4rem 0;
-  font-size: 1.1rem;
+/* Menu items */
+.menu-item {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  max-width: 420px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dish {
-  color: var(--card-sky);
+  color: var(--text);
   font-weight: 600;
 }
 
 .price {
-  color: var(--card-gold);
+  color: var(--secondary);
 }
 
+.item-description {
+  color: var(--text);
+  opacity: 0.75;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+/* Tag badges */
+.item-tags {
+  margin-top: 0.35rem;
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--secondary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Alcohol section */
+.alcohol-section {
+  border-top: 2px solid var(--secondary);
+  padding-top: 1rem;
+  margin-top: 2rem;
+}
+
+/* Image placeholder */
 .image-slot {
   width: 100%;
   height: 180px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px dashed var(--card-sky);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px dashed var(--secondary);
   border-radius: 0.5rem;
   margin-top: 2rem;
 }
 
+/* Footer */
 .card-footer {
   margin-top: 2rem;
   text-align: center;
   font-size: 0.95rem;
-  color: var(--card-muted);
-  letter-spacing: 0.4px;
+  color: var(--text);
+  opacity: 0.8;
 }
 
 .card-footer .footer-handle {
-  color: var(--card-gold);
+  color: var(--secondary);
   font-weight: 600;
 }
