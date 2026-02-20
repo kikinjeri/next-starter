@@ -1,212 +1,86 @@
 /* ----------------------------------------
-   STRUCTURAL COMPONENTS
+   FONT CRISPNESS + INTER
 ---------------------------------------- */
-/* Load crisp Inter font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-.header {
-  width: 100%;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
-}
-
-.footer {
-  width: 100%;
-  padding: 2rem 0;
-  border-top: 1px solid var(--border);
-  margin-top: 4rem;
-  font-size: 0.875rem;
-  color: var(--muted);
-}
-
-/* Card */
-
-.card {
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  padding: 1.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(6px);
-}
-
-.card-footer {
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 0.95rem;
-  color: var(--card-muted);
-  letter-spacing: 0.4px;
-}
-
-.card-footer .footer-handle {
-  color: var(--card-gold);
-  font-weight: 600;
-}
-
-/* Section title */
-
-.section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1.25rem;
-  color: var(--foreground);
+/* Apply smoothing */
+.restaurant-card,
+.restaurant-card * {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* ----------------------------------------
-   BUTTON SYSTEM
----------------------------------------- */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.7rem 1.4rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.1s ease;
-  text-decoration: none;
-}
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: #000;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: var(--accent-2);
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--foreground);
-  border-color: var(--border);
-}
-
-.btn-secondary:hover:not(:disabled) {
-  border-color: var(--accent);
-  transform: translateY(-1px);
-}
-
-.btn-ghost {
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--foreground);
-}
-
-.btn-ghost:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-1px);
-}
-
-/* Social buttons */
-
-.btn-bluesky {
-  background: #1e90ff;
-  color: #fff;
-}
-
-.btn-bluesky:hover:not(:disabled) {
-  background: #187bcd;
-}
-
-.btn-facebook {
-  background: #1877f2;
-  color: #fff;
-}
-
-.btn-facebook:hover:not(:disabled) {
-  background: #145ec4;
-}
-
-.btn-instagram {
-  background: #e1306c;
-  color: #fff;
-}
-
-.btn-instagram:hover:not(:disabled) {
-  background: #b82455;
-}
-
-/* ----------------------------------------
-   RESTAURANT CARD (SEMANTIC + ACCESSIBLE)
-   Uses restaurant-specific colors:
-   --primary, --secondary, --text
+   RESTAURANT CARD (SEMANTIC + COMPACT)
 ---------------------------------------- */
 
 .restaurant-card {
   width: 100%;
-  max-width: 640px;
-  margin: 2rem auto;
-  padding: 2rem;
+  max-width: 480px;
+  margin: 1.5rem auto;
+  padding: 1.25rem;
   background: var(--primary);
   color: var(--text);
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   border: 2px solid var(--secondary);
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
-  font-family: 'Inter', system-ui, sans-serif;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
 }
 
+/* Header */
 .card-header h1 {
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--secondary);
   margin-bottom: 0.25rem;
 }
 
 .neighbourhood {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   color: var(--secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
+/* Description */
 .description {
-  margin: 1rem 0;
+  margin: 0.75rem 0;
   color: var(--text);
-  opacity: 0.85;
-  line-height: 1.6;
+  opacity: 0.9;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
+/* Info section */
 .info-section p strong {
   color: var(--secondary);
   font-weight: 600;
 }
 
-/* Menu layout */
+/* Menu */
 .menu-section {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1.25rem;
 }
 
 .menu-section h2 {
   color: var(--secondary);
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Category titles */
+/* Category */
 .menu-category {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .category-title {
   color: var(--secondary);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 /* Category list centered */
@@ -219,8 +93,8 @@
 
 /* Menu items */
 .menu-item {
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   max-width: 420px;
 }
@@ -243,12 +117,12 @@
 .item-description {
   color: var(--text);
   opacity: 0.75;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   margin-top: 0.25rem;
   line-height: 1.4;
 }
 
-/* Tag badges */
+/* Tags */
 .item-tags {
   margin-top: 0.35rem;
   display: flex;
@@ -257,11 +131,11 @@
 }
 
 .tag {
-  padding: 0.15rem 0.5rem;
+  padding: 0.1rem 0.4rem;
   border-radius: 0.35rem;
   background: rgba(255, 255, 255, 0.15);
   color: var(--secondary);
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -269,30 +143,39 @@
 /* Alcohol section */
 .alcohol-section {
   border-top: 2px solid var(--secondary);
-  padding-top: 1rem;
-  margin-top: 2rem;
+  padding-top: 0.75rem;
+  margin-top: 1.5rem;
 }
 
-/* Image placeholder */
+/* Remove blank rectangle */
 .image-slot {
-  width: 100%;
-  height: 180px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px dashed var(--secondary);
-  border-radius: 0.5rem;
-  margin-top: 2rem;
+  display: none;
 }
 
 /* Footer */
 .card-footer {
-  margin-top: 2rem;
+  margin-top: 1.25rem;
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
+/* Remove @ottawa-menus */
 .card-footer .footer-handle {
-  color: var(--secondary);
-  font-weight: 600;
+  display: none;
+}
+
+/* ----------------------------------------
+   MOBILE OPTIMIZATION
+---------------------------------------- */
+@media (max-width: 480px) {
+  .restaurant-card {
+    padding: 1rem;
+    border-width: 1px;
+  }
+
+  .menu-item {
+    max-width: 100%;
+  }
 }

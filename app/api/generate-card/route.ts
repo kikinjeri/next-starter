@@ -1,6 +1,26 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { generateRestaurantCardHTML } from "@/lib/generators/restaurantCard";
+import { lookupWebsiteFree } from "@/lib/web/lookupWebsite";
+
+// Validate website URLs so broken links don't appear
+function validateWebsite(url?: string | null): string | null {
+  if (!url) return null;
+
+  try {
+    const parsed = new URL(url);
+
+    // Must be https
+    if (parsed.protocol !== "https:") return null;
+
+    // Must have a real domain
+    if (!parsed.hostname.includes(".")) return null;
+
+    return parsed.toString();
+  } catch {
+    return null;
+  }
+}
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -32,27 +52,66 @@ export async function GET(req: Request) {
     );
   }
 
-  // Fetch menu items
+  // ----------------------------------------
+  // WEBSITE + PHONE LOOKUP (FREE)
+  // ----------------------------------------
+
+  // WEBSITE + PHONE LOOKUP (FREE)
+const lookup = await lookupWebsiteFree(restaurant.name, restaurant.address);
+
+// Fallback website validation
+const validatedStoredWebsite = validateWebsite(restaurant.website);
+
+restaurant.website = lookup.website || validatedStoredWebsite || null;
+restaurant.phone = lookup.phone || restaurant.phone || null;
+
+
+  const validatedStoredWebsite = validateWebsite(restaurant.website);
+
+  restaurant.website = lookup.website || validatedStoredWebsite || null;
+  restaurant.phone = lookup.phone || restaurant.phone || null;
+
+  // ----------------------------------------
+  // GOOGLE MAPS LINK (NO API KEY REQUIRED)
+  // ----------------------------------------
+
+  if (restaurant.address) {
+    restaurant.google_maps_url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      restaurant.address
+    )}`;
+  } else {
+    restaurant.google_maps_url = null;
+  }
+
+  // ----------------------------------------
+  // FETCH MENU + SPECIALS
+  // ----------------------------------------
+
   const { data: menuItems } = await supabase
     .from("menu_items")
     .select("*")
     .eq("restaurant_id", id);
 
-  // Fetch specials
   const { data: specials } = await supabase
     .from("specials")
     .select("*")
     .eq("restaurant_id", id)
     .single();
 
-  // Generate the card HTML (semantic, accessible, brand-colored)
+  // ----------------------------------------
+  // GENERATE CARD HTML
+  // ----------------------------------------
+
   const cardHTML = generateRestaurantCardHTML(
     restaurant,
     menuItems || [],
     specials || undefined
   );
 
-  // Return a full HTML document that loads styles.css
+  // ----------------------------------------
+  // RETURN FULL HTML DOCUMENT
+  // ----------------------------------------
+
   return new NextResponse(
     `
     <!DOCTYPE html>
@@ -60,10 +119,7 @@ export async function GET(req: Request) {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <!-- Load ONLY the restaurant-card stylesheet -->
         <link rel="stylesheet" href="/styles/styles.css" />
-
         <title>${restaurant.name} — Menu Card</title>
       </head>
 

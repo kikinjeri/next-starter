@@ -65,7 +65,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="footer text-center">I ❤️ Ottawa</footer>
+     
     </main>
   );
 }
