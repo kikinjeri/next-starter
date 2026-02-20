@@ -65,7 +65,9 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-     
+      <footer className="footer text-center mt-16 py-6 text-[var(--card-muted)]">
+        I ❤️ Ottawa!
+      </footer>
     </main>
   );
 }

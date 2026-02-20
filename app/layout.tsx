@@ -1,21 +1,15 @@
 import "./globals.css";
-import type { ReactNode } from "react";
+import "./styles/dashboard.css";
 
 export const metadata = {
-  title: "Ottawa Menus App",
-  description: "Posting Ottawa restaurant menus to Bluesky!",
+  title: "Ottawa Menus",
+  description: "Restaurant dashboard",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <header>
-      
-      </header>
       <body>{children}</body>
-      <footer className="footer text-center mt-16 py-6 text-[var(--card-muted)]">
-        I ❤️ Ottawa!
-      </footer>
     </html>
   );
 }

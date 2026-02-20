@@ -10,6 +10,7 @@ export default function RestaurantsDashboard({ restaurants }) {
   const neighborhoods = [
     ...new Set(restaurants.map((r) => r.neighbourhood).filter(Boolean)),
   ];
+
   const categories = [
     ...new Set(restaurants.flatMap((r) => r.categories || [])),
   ];
@@ -35,10 +36,12 @@ export default function RestaurantsDashboard({ restaurants }) {
 
   return (
     <div className="max-w-5xl mx-auto py-10 space-y-8">
+      {/* Heading */}
       <h1 className="text-4xl font-bold text-[var(--accent)]">
         Restaurant Dashboard
       </h1>
 
+      {/* Search */}
       <input
         type="text"
         placeholder="Search by name, neighborhood, or category..."
@@ -47,6 +50,7 @@ export default function RestaurantsDashboard({ restaurants }) {
         className="w-full px-4 py-3 border rounded-lg shadow-sm"
       />
 
+      {/* Filters */}
       <div className="flex gap-4">
         <select
           value={neighborhood}
@@ -75,16 +79,18 @@ export default function RestaurantsDashboard({ restaurants }) {
         </select>
       </div>
 
+      {/* Restaurant Cards */}
       <div className="grid sm:grid-cols-2 gap-6">
         {filtered.map((restaurant) => (
           <div
             key={restaurant.id}
-            className="p-6 rounded-xl shadow-lg border bg-white flex flex-col justify-between"
+            className="dashboard-card flex flex-col justify-between"
           >
             <div>
               <h2 className="text-2xl font-semibold text-[var(--accent)]">
                 {restaurant.name}
               </h2>
+
               <p className="text-sm text-gray-600">
                 {restaurant.neighbourhood}
               </p>
@@ -96,11 +102,12 @@ export default function RestaurantsDashboard({ restaurants }) {
               )}
             </div>
 
+            {/* Buttons */}
             <div className="flex gap-2 mt-6">
               <a
                 href={`/api/generate-card?id=${restaurant.id}`}
                 target="_blank"
-                className="px-3 py-1 bg-blue-600 text-white rounded text-sm"
+                className="btn btn-primary"
               >
                 Preview
               </a>
@@ -113,15 +120,12 @@ export default function RestaurantsDashboard({ restaurants }) {
                   });
                   alert("Posted to Bluesky!");
                 }}
-                className="px-3 py-1 bg-sky-600 text-white rounded text-sm"
+                className="btn btn-secondary"
               >
                 Post
               </button>
 
-              <a
-                href={`/restaurants/${restaurant.id}`}
-                className="px-3 py-1 bg-gray-200 rounded text-sm"
-              >
+              <a href={`/restaurants/${restaurant.id}`} className="btn">
                 Edit
               </a>
             </div>

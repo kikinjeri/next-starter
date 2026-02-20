@@ -1,13 +1,12 @@
-import { createClient } from "@supabase/supabase-js";
 import RestaurantsDashboard from "../restaurants/RestaurantsDashboard";
 
-export default async function Page() {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+export default async function DashboardPage() {
+  // Fetch restaurants from your API route
+  const res = await fetch("http://localhost:3000/api/restaurants", {
+    cache: "no-store",
+  });
 
-  const { data: restaurants } = await supabase.from("restaurants").select("*");
+  const restaurants = await res.json();
 
-  return <RestaurantsDashboard restaurants={restaurants || []} />;
+  return <RestaurantsDashboard restaurants={restaurants} />;
 }

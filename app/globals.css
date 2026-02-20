@@ -1,67 +1,22 @@
-/* Tailwind base layers */
+@source "../";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ----------------------------------------
-   GLOBAL VARIABLES (Bluesky-inspired)
----------------------------------------- */
 :root {
-  --accent: #0a1a2f;        /* deep navy */
-  --accent-light: #1c2f4a;  /* lighter navy */
-  --gold: #f5c26b;          /* warm gold */
+  --background: #f5f8fa;
+  --foreground: #0a0a0a;
+  --accent: #0a1a2f;
+  --accent-light: #1c2f4a;
+  --gold: #f5c26b;
   --text-dark: #1a1a1a;
   --text-light: #ffffff;
 }
 
-/* Apply global background + font smoothing */
 html, body {
   background: var(--background);
   color: var(--foreground);
   font-family: system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-/* ----------------------------------------
-   CUSTOM COMPONENTS (NO @apply)
----------------------------------------- */
-
-.btn {
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.25rem 0.75rem;
-  transition: all 0.2s ease;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: var(--accent-light);
-}
-
-.btn-secondary {
-  background: var(--gold);
-  color: var(--text-dark);
-}
-
-.btn-secondary:hover {
-  background: #e0b05f;
-}
-
-.dashboard-card {
-  border: 1px solid #e5e7eb;
-  background: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }

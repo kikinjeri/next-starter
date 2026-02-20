@@ -1,0 +1,53 @@
+/* ----------------------------------------
+   Dashboard UI Styles
+   These styles apply to the dashboard cards,
+   buttons, and admin panel components.
+---------------------------------------- */
+
+/* Base button */
+.btn {
+  display: inline-block;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Primary button (navy) */
+.btn-primary {
+  background: var(--accent);
+  color: var(--text-light);
+}
+
+.btn-primary:hover {
+  background: var(--accent-light);
+}
+
+/* Secondary button (gold) */
+.btn-secondary {
+  background: var(--gold);
+  color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+  background: #e0b05f;
+}
+
+/* Dashboard card container */
+.dashboard-card {
+  border: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
